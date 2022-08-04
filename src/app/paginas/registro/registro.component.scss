@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap');
+
+* {box-sizing: border-box}
+
+.containerForm {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 20px;
+    width: 800px;
+    min-width: 300px;
+    left: 50%;
+    top: 120%;
+    margin: 1% auto;
+    border:1px solid rgb(0, 0, 0);
+    border-radius:2px;
+    background-color: rgba(37, 37, 37, 0.925);
+    -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+    -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+    box-shadow: 2px 30px 89px 3px #000;
+  }
+
+input[type=text], input[type=password], input[type=number], input[type=file] {
+  width: 100%;
+  padding: 15px;
+  margin-top: 5px;
+  display: inline-block;
+  border-radius:2px;
+  border: none;
+  color: rgba(255, 255, 255, 0.74);
+  background-color: rgba(99, 99, 99, 0.507);
+}
+select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 5px;
+  display: inline-block;
+  border: none;
+  background: #f7f7f7;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, select:focus {
+  background-color: rgba(65, 166, 249, 0.925);
+  outline: none;
+}
+
+.button {
+  background-color: rgba(65, 166, 249, 0.925);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius:2px;
+  width: 100%;
+  opacity: 0.9;
+  font-size:16px;
+}
+
+.button:hover:enabled {
+  background-color:rgba(34, 123, 196, 0.925);
+}
+
+.button:disabled {
+  background-color: rgba(34, 123, 196, 0.925);
+}
+
+
+@media screen and (max-width: 910px) {
+  .signupbtn {
+     width: 100%;
+  }
+  
+  .containerForm{
+      width: 500px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+    .signupbtn {
+       width: 100%;
+    }
+    
+    .containerForm{
+        width: 250px;
+    }
+  }
+
+.invalid{
+  color: rgba(65, 166, 249, 0.925);
+}
+

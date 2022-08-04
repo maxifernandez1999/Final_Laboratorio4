@@ -1,0 +1,15 @@
+.pag {
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    font-size: 1.125rem;
+    text-anchor: middle;
+    height: 100vh;
+    color: rgb(231, 226, 226);
+  }
+
+.blur
+{
+    background: rgba(0, 0, 0, 0.568); 
+    backdrop-filter: blur(8px); 
+}

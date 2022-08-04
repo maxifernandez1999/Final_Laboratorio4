@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div>
+        <div class="row justify-content-around">
+            <button class="button blur col-3 fs-5" (click)="cargarGraficoDias()" @enterState [disabled]="this.diasDisabled">Grafico de dias</button>
+            <button class="button blur col-3 fs-5" (click)="this.graficos(2)" @enterState [disabled]="this.especialidadesDisabled">Grafico de especialidades</button>
+            <button class="button blur col-3 fs-5" (click)="this.mostrarForm = !this.mostrarForm" @enterState [disabled]="this.tsDisabled">Grafico de turnos solicitados</button>
+            <button class="button blur col-3 fs-5" (click)="this.mostrarForm = !this.mostrarForm && this.turnosFinalizados = !this.turnosFinalizados" @enterState [disabled]="this.tfDisabled">Grafico de turnos finalizados</button>
+            <button class="button blur col-3 fs-5" (click)="this.mostrarLogs = !this.mostrarLogs" @enterState>Logs</button>
+        </div>
+    </div>
+    
+    <div class="row justify-content-around mb-4" style="height: 400px;" *ngIf='this.arraydias != []'>
+        <div class="col-12 mb-4 blur" style="background-color: rgba(252, 252, 252, 0.589);">
+            <figure class="highcharts-figure">
+            <div id="graficoBarrasDias">
+            </div>
+        </figure>
+        <button class="mt-1 mb-1 btn btn-dark" *ngIf='this.mostrarGraficoDias' (click)="this.imprimirPdf('graficoBarrasDias')">Generar PDF</button>
+        </div>
+        <div class="col-3 mb-4 blur" style="background-color: rgba(252, 252, 252, 0.589);width: 400px; height: 450px;" @enterState>
+            <canvas id="especialidades" style="width: 300px; height: 400px;"></canvas>
+            <button class="mt-2 btn btn-dark" *ngIf='this.mostrarGraficoEspecialidades' (click)="this.imprimirPdf('especialidades')">Generar PDF</button>
+        </div>
+        <div class="col-3 mb-4 blur" style="background-color: rgba(252, 252, 252, 0.589);width: 400px; height: 450px;" @enterState>
+            <canvas id="especialistas"  style="width: 400px; height: 400px;"></canvas>
+            <button class="mt-2 btn btn-dark" *ngIf='this.mostrarGraficoEspecialistas' (click)="this.imprimirPdf('especialistas')">Generar PDF</button>
+        </div>
+        <div class="col-3 mb-4 blur" style="background-color: rgba(252, 252, 252, 0.589); width: 400px; height: 450px;" @enterState>        
+            <canvas id="especialistasFinalizados"  style="width: 400px; height: 400px;"></canvas>
+            <button class="mt-2 btn btn-dark" *ngIf='this.mostrarGraficoEspecialistas2' (click)="this.imprimirPdf('especialistasFinalizados')">Generar PDF</button>
+        </div>
+        <div class="col-10 text-center blur" style="display: inline-block;" *ngIf='this.mostrarForm && (this.fechaInicialSolicitados == "" && this.fechaFinalSolicitados == "" || this.fechaInicialFinalizados == "" && this.fechaFinalFinalizados == "")' style="background-color: rgba(252, 252, 252, 0.589);">
+            <form [formGroup]="form" (ngSubmit)='this.graficos(3)'>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row ">
+                        <div class="col-12 mt-2 ">
+                            <p class="fs-5">Fecha inicial del lapso de tiempo: </p>
+                            <input type="text" class="form-control" placeholder="DD/MM/AAAA" formControlName="fechaInicial" required>
+                            <small class="invalid" *ngIf="form.controls.fechaInicial.errors?.required && form.controls.fechaInicial.touched">La fecha es requerida</small>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p class="fs-5">Fecha final del lapso de tiempo: </p>
+                            <input type="text" class="form-control" placeholder="DD/MM/AAAA" formControlName="fechaFinal" required>
+                            <small class="invalid" *ngIf="form.controls.fechaFinal.errors?.required && form.controls.fechaFinal.touched">La fecha es requerida</small>
+                        </div>
+                        </div>
+                    </div>       
+                </div>
+                <button type="submit" class="btn btn-dark mb-3 mt-2" [disabled]='form.invalid'>Enviar</button>
+            </form>
+        </div>
+        <div class="mt-4 col-12 text-center blur" *ngIf='this.mostrarLogs' style="background-color: rgba(252, 252, 252, 0.589); border-radius: 2px;">
+                <div class="row mt-2 mb-2">
+                    <div class="col-3 mt-1" *ngFor="let log of this.logs" style="border-style: solid; border-color: rgba(252, 252, 252, 0.548);">
+                        <p class="fs-5 mt-2">
+                        <b>Usuario:</b> {{log.usuario.nombre}} {{log.usuario.apellido}}
+                        </p>    
+                        <p class="fs-5">
+                        <b>Dia:</b> {{log.dia}}
+                        </p>
+                        <p class="fs-5">
+                            <b>Hora:</b> {{log.hora}}
+                        </p>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <button class="btn btn-dark" (click)="this.generarExcel()">Generar Excel</button>
+                    </div>
+            </div>        
+    </div>  
+    </div>
+<script src="/public/node_modules/chart.js/dist/Chart.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+

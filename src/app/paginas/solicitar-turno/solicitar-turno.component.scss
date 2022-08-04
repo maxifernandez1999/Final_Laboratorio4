@@ -1,0 +1,84 @@
+.button {
+  background-color: rgba(0, 0, 0, 0.829);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius:2px;
+  cursor: pointer;
+  width: 400px;
+  height: 400px;
+}
+
+.button:hover {
+  background-color: rgba(27, 27, 27, 0.829);
+}
+
+.gridTurnos {
+  overflow-y:scroll;
+  max-height: 350px;
+}
+
+.button2 {
+  background-color: rgb(118, 29, 170);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius:2px;
+  width: 100%;
+  opacity: 0.9;
+  font-size:16px;
+}
+
+.button2:hover:enabled {
+  background-color: rgb(145, 38, 207);
+}
+
+.button3 {
+  background-color:  rgba(118, 29, 170, 0.925);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px;
+  border: none;
+  border-radius:2px;
+  cursor: pointer;
+  width: 150px;
+  height: 100px;
+}
+
+.button3:hover {
+  background-color: rgba(145, 38, 207, 0.925);
+}
+
+.buttonHora {
+  background-color:  rgba(118, 29, 170, 0.925);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px;
+  border: none;
+  border-radius:2px;
+  cursor: pointer;
+  width: 100px;
+  height: 60px;
+}
+
+.button3:hover {
+  background-color: rgba(145, 38, 207, 0.925);
+}
+
+.botonon {
+  background-color: rgba(0, 0, 0, 0.664);
+  color: white;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius:2px;
+  cursor: pointer;
+  width: 400px;
+  height: 150px;
+}
+
+.botonon:hover {
+  background-color: rgba(27, 27, 27, 0.829);
+}

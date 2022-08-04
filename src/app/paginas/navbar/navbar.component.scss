@@ -1,0 +1,29 @@
+
+.barra {
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 60px;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.411); 
+    backdrop-filter: blur(8px); 
+    margin-top: 5px;
+}
+
+.button
+{
+    margin-left: 10px;
+    border-radius: 2px;
+    color: rgba(255, 255, 255, 0.801) !important;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+.button:hover
+{
+    border-radius: 2px;
+    transition: all 0.2s ease-in-out;
+    color: black !important;
+    background-color: rgb(224, 222, 222);
+}

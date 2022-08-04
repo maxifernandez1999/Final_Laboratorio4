@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg nav navbar-dark barra">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 5px;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link button" [routerLink] = "['/bienvenido']">{{'NAVBAR.WELCOME' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/login']">{{'NAVBAR.LOGIN' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/registro']">{{'NAVBAR.REGISTER' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/usuarios/todosLosUsuarios']">{{'NAVBAR.USER' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/turnos/solicitarTurno']">{{'NAVBAR.REQUEST' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/pacientes']">{{'NAVBAR.PATIENT' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/estadisticas']">{{'NAVBAR.STATISTICS' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link button" [routerLink] = "['/encuesta']">{{'NAVBAR.POLL' | translate}}</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="this.as.logeado">
+      <a class="nav-link button" (click)=this.logOut()>{{'NAVBAR.LOGOUT' | translate}}</a>
+    </div>
+    <div *ngIf="this.as.logeado">
+      <a class="nav-link button" [routerLink] = "['/perfilGeneral']">{{this.as.logeado.nombre}} {{this.as.logeado.apellido}}</a>
+    </div>
+  </nav>

@@ -1,0 +1,39 @@
+{
+    "HOME": {
+        "TITLE": "Welcome!",
+        "SUBTITLE": "Online Clinic - Laboratory 4",
+        "P1": "At the top you will find the menu to navigate through the areas of this clinic.",
+        "P2": "Sign in to continue. If you already have a profile created, enter the system from the login tab",
+        "P3": "Thank you so much and we hope you have a good day!",
+        "LOGIN": "Login",
+        "REGISTER": "Register"
+    },
+    "NAVBAR": {
+        "WELCOME": "Welcome",
+        "LOGIN": "Login",
+        "REGISTER": "Register",
+        "USER": "Users",
+        "REQUEST": "Request Shifts",
+        "PATIENT": "Patients",
+        "STATISTICS": "Clinic Statistics",
+        "LOGOUT": "LogOut",
+        "POLL": "Poll"
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": {
+            "EMAIL": "E-mail",
+            "REQUIRED":"Email required",
+            "INVALID":"Invalid Email"
+        },
+        "PASSWORD": {
+            "PASSWORD":"Password",
+            "REQUIRED": "Password required",
+            "INVALID":"Password must be 6 characters or more"
+        },
+        "LOGIN": "Enter",
+        "ENTERFAST": "Enter fast",
+        "PROFILE": "Profile:"
+    }
+    
+}

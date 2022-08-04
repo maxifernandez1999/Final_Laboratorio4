@@ -1,0 +1,13 @@
+<div class="p-3">
+  <div class="text-light mt-2">
+    <div class="row justify-content-around m-2 text-center">            
+            <div class="card bg-dark text-white mt-2 ml-1 col-7 " style="width: 12em; height: 16em; border-color: rgba(34, 123, 196, 0.925); cursor: pointer;"
+            *ngFor='let admin of this.admins'>
+                <div class="card-body">
+                  <img class="card-img-top col me-3" src="{{admin.imagen}}" width="20px" height="120px">              
+                  <h6 class="card-title mt-3">{{admin.nombre}} {{admin.apellido}}</h6>
+                </div>
+            </div>
+    </div> 
+</div>    
+

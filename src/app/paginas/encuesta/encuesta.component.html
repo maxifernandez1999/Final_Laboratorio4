@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <!-- <div *ngIf="this.as.loading">
+           <div *ngIf="this.as.loading">
+               <app-spinner></app-spinner>
+           </div>
+   </div> -->
+    <form [formGroup]='form' (ngSubmit)='this.agregarEncuesta()'>
+        <div class="containerForm text-white">
+            <h2 class="text-center" style="letter-spacing: 2px; ">Encuesta</h2>
+            <br>
+            <div class="row justify-content-center">
+                <label for="atencion">Que le parecio nuestra atencion?</label>
+                <div class="wrapper col-12 col-sm-6 mb-2">
+                    <input #radio1 type="radio" name="select" id="option-1" (click)="this.getCheck('buena')" checked>
+                    <input #radio2 type="radio" name="select" id="option-2"  (click)="this.getCheck('mala')">
+                    <label for="option-1" class="option option-1">
+                        <div class="dot"></div>
+                        <span>Buena</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <div class="dot"></div>
+                        <span>Media</span>
+                    </label>
+                </div>
+                <div class="col-12 col-sm-6 mb-2">
+                    <label for="puntaje">Puntue nuestra web</label>
+                    <div class="star-rating">
+                        <a #star1 (click)="this.addStar('1')">★</a>
+                        <a #star2 (click)="this.addStar('2')">★</a>
+                        <a #star3 (click)="this.addStar('3')">★</a>
+                        <a #star4 (click)="this.addStar('4')">★</a>
+                        <a #star5 (click)="this.addStar('5')">★</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12 mb-2">
+                    <label for="comentario">Deje algo en lo que cree que debamos mejorar:</label>
+                    <input type="text" formControlName='comentario' name="comentario" required>
+                    <small class="invalid"
+                        *ngIf="form.controls.comentario.errors?.required && form.controls.comentario.touched">Es
+                        requerido</small>
+                </div>
+                <div class="col-md-6 col-12 mb-2">
+                    <label for="instalacion">Puntue del 1 a 100 la calidad de nuestras instalaciones:</label>
+                    <input type="range" formControlName='instalacion' name="instalacion" required>
+
+                    <small class="invalid"
+                        *ngIf="form.controls.instalacion.errors?.required && form.controls.instalacion.touched">Es
+                        requerido</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12 mb-2">
+                    <label for="sino">Volveria a elegirnos? Si / No</label>
+                    <input type="checkbox" formControlName='sino' name="sino" required>
+
+                    <small class="invalid" *ngIf="form.controls.sino.errors?.required && form.controls.sino.touched">Es
+                        requerido</small>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" [disabled]='form.invalid' class="button fs-4">Enviar</button>
+            </div>
+        </div>
+    </form>
+</div>

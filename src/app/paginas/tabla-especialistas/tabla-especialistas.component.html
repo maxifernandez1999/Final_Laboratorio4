@@ -1,0 +1,19 @@
+<div class="p-3">
+  <div class="text-light mt-2">
+    <div class="row justify-content-around m-2 text-center">            
+            <div class="card bg-dark text-white mt-2 ml-1 col-7 " style="width: 12em; height: 19em; border-color: rgba(34, 123, 196, 0.925); cursor: pointer;"
+            *ngFor='let especialista of this.especialistas'>
+                <div class="card-body">
+                    <img class="card-img-top" src="{{especialista.imagen}}" width="10px" height="140px">
+                    <h6 class="card-title mt-3">{{especialista.nombre}} {{especialista.apellido}}</h6>
+                    <p class="card-text">
+                      <div>
+                        <button class="btn btn-outline-light" (click)="cambiarEstadoCuenta(especialista,1)" *ngIf='especialista.estadoCuenta !== "Habilitada"'>Habilitar</button>
+                        <button class="btn btn-outline-light mt-2" (click)="cambiarEstadoCuenta(especialista,2)" *ngIf='especialista.estadoCuenta !== "Inhabilitada"'>Inhabilitar</button>
+                      </div>
+                </div>
+            </div>
+    </div> 
+</div>
+</div>    
+

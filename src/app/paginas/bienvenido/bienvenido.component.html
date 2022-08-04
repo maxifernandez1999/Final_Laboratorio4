@@ -1,0 +1,22 @@
+<app-navbar [lang]="language"></app-navbar>
+<div class="d-flex w-100 p-3 mx-auto flex-column text-center pag">
+    <main role="main" class="inner cover blur ps-3 pe-3 pb-2 pt-5 pb-5"
+        style=" width: 75%; margin-left: auto; margin-right: auto;">
+        <h1 *ngIf="!this.as.logeado" class="cover-heading">{{'HOME.TITLE' | translate }}</h1>
+        <h1 *ngIf="this.as.logeado" class="cover-heading">
+            {{'HOME.TITLE' | translate }} {{this.as.logeado.nombre}} {{this.as.logeado.apellido}} 
+        </h1>
+        <h2 class="cover-heading">{{'HOME.SUBTITLE' | translate }}</h2>
+        <p class="lead pt-1">{{'HOME.P1' | translate }}</p>
+        <p class="lead pt-1">{{'HOME.P2' | translate }}</p>
+        <p class="lead pt-1">{{'HOME.P3' | translate }}</p>
+    </main>
+
+    <div class="row justify-content-around text-center mt-5" *ngIf='this.as.logeado == ""'>
+        <div class="col-12">
+            <button appBtnsBienvenido class="col-5 button fs-3 me-2 blur" (click)='this.navegar(1)'>{{'HOME.LOGIN' | translate }}</button>
+            <button appBtnsBienvenido class="col-5 button fs-3 ms-2 blur" (click)='this.navegar(2)'>{{'HOME.REGISTER' | translate }}</button>
+        </div>
+    </div>
+</div>
+<app-idioms (lang)="changeLanguage($event)"></app-idioms>

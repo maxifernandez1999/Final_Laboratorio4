@@ -1,0 +1,198 @@
+<app-navbar></app-navbar>
+<div class="mb-5" *ngIf="this.as.loading">
+    <div class="mb-5" *ngIf="this.as.loading">
+        <app-spinner></app-spinner>
+    </div>
+</div>
+<div class="text-end mb-3 mt-2" style="margin-right: 40px;">
+    <button class="btn btn-dark" (click)=this.logOut()>LogOut</button>
+</div>
+<div class="container">
+    <div class="bg-dark row justify-content-around text-light p-4" style="border-radius: 2px;">
+        <div class="col-6">
+            <div class="text-center">
+                <div *ngIf='this.usuarioActual.perfil == "paciente"' class="row text-center justify-content-around">
+                    <div class="col-12">
+                        <img class="col-4 me-2" style="border-radius: 150px;" *ngFor="let imagen of this.usuarioActual.imagenes" [src]=imagen width=200px height=200px >
+                    </div>
+                </div>
+                <div *ngIf='this.usuarioActual.perfil != "paciente"' class="text-center">
+                    <div>
+                        <img class="mt-2" style="border-radius: 100px;" [src]="this.usuarioActual.imagen" width=150px height=150px >
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <p class="fs-4 text-center">{{this.as.logeado.nombre}} {{this.as.logeado.apellido}}</p>
+                <p class="fs-4 text.left">DNI: {{this.as.logeado.dni}}</p>
+                <p class="fs-4 text.left">Edad: {{this.as.logeado.edad}}</p>
+                <p class="fs-4 text.left">Mail: {{this.as.logeado.mail}}</p>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-light m-2 col-6" *ngIf='this.usuarioActual.perfil == "especialista"' (click)='this.mostrarEspecialidades = !this.mostrarEspecialidades'>Mis Horarios</button>
+            <button class="btn btn-light m-2 col-6" *ngIf='this.usuarioActual.perfil == "especialista" && this.mostrarEspecialidades' (click)="this.subirHorario()">Cargar horarios</button>
+            <button class="btn btn-light m-2 col-6" *ngIf='this.usuarioActual.perfil == "paciente"' (click)='this.ver()'>Ver historia clínica</button>
+        </div>
+        <div *ngIf='this.mostrarHC' class="text-light mt-2">
+            <div class="row justify-content-around m-2">    
+                    <div class="row">
+                        <input class="form-control col-12" type="text" placeholder="Especialidad" [(ngModel)]="datoABuscar" (ngModelChange)="buscar()">       
+                    </div>    
+                    <h2 *ngIf="this.historiasClinicasAFiltrar.length == 0" class="mt-3 text-light">No hay niguna historia clínica con esa especialidad</h2>    
+                    <div class="card text-dark mt-2 ml-1 col-9 " style="background-color: rgb(122, 122, 122); border-color: rgba(34, 123, 196, 0.925); cursor: pointer;"
+                    *ngFor='let hc of this.historiasClinicasAFiltrar' >
+                    <div>
+                        <div class="card-header" style="background-color: rgb(122, 122, 122);" > 
+                            <p>
+                                <b class="fs-5 me-5">Fecha: {{hc.fecha.dia}}</b> 
+                                <b class="fs-5 me-5">Especialista: {{hc.especialista.nombre}} {{hc.especialista.apellido}}</b>
+                                <b class="fs-5">Especialidad: {{hc.especialidad.nombre}}</b>
+                            </p>
+                         </div>
+                        <div class="card-body" style="background-color: rgb(122, 122, 122);">
+                            <p class="fs-5">
+                                <b>Altura:</b> {{hc.altura}}
+                              </p>
+                              <p class="fs-5">
+                                <b>Peso:</b> {{hc.peso}}
+                              </p>
+                              <p class="fs-5">
+                                <b>Temperatura:</b> {{hc.temperatura}}
+                              </p>
+                              <p class="fs-5">
+                                <b>Presión:</b> {{hc.presion}}
+                              </p>
+                              <p class="fs-5" *ngIf='hc.datoDinamico1 != ""'>
+                                <b>{{hc?.datoDinamico1?.clave}}:</b> {{hc?.datoDinamico1?.valor}}
+                              </p>   
+                              <p class="fs-5" *ngIf='hc.datoDinamico2 != ""'>
+                                <b>{{hc?.datoDinamico2?.clave}}:</b> {{hc?.datoDinamico2?.valor}}
+                              </p> 
+                              <p class="fs-5" *ngIf='hc.datoDinamico3 != ""'>
+                                <b>{{hc?.datoDinamico3?.clave}}:</b> {{hc?.datoDinamico3?.valor}}
+                              </p>
+                        </div>
+                    </div>
+                        <button class="btn btn-light mt-2 mb-1" (click)="previsualizarPDF(hc)">Previsualizar PDF</button>
+                    </div>
+            </div> 
+        </div>
+        <div *ngIf='this.mostrarEspecialidades' class="text-light mt-2">
+            <div class="row justify-content-around m-2 text-center">            
+                    <div class="card bg-dark text-white mt-2 ml-1 col-7 " style="width: 12em; height: 14em; border-color: rgba(34, 123, 196, 0.925); cursor: pointer;"
+                    *ngFor='let especialidad of this.as.logeado.especialidad'>
+                        <div class="card-body" (click)='this.especialidadSeleccionada = especialidad'>
+                            <img class="card-img-top" src="{{especialidad.imagen}}" width="10px" height="120px">
+                            <h6 class="card-title mt-3">{{especialidad.nombre}}</h6>
+                        </div>
+                    </div>
+            </div> 
+        </div>
+        <div class="container bg-dark text-light mt-4 row" *ngIf='this.especialidadSeleccionada != ""'> 
+            <div class="col-12">
+                <div class="col-9">
+                  <h4>Horarios para <b>{{this.especialidadSeleccionada.nombre}}</b></h4>
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-success mr-5 mt-2" (click)="cargarHorario()">Guardar</button>
+                </div>
+              </div>
+              <div class="col-12 justify-content-center text-center">
+                <table class="table table-dark tablaUsers mt-3">
+                    <thead>
+                      <th>L</th>
+                      <th>M</th>
+                      <th>M</th>
+                      <th>J</th>
+                      <th>V</th>
+                      <th>S</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> <button class="btn btn-sm" type="button" id="1" (click)="seleccionarDia(1)"
+                            [ngClass]="lunesSeleccionado ? 'success' : 'danger'">𝙇</button>
+                        </td>
+                        <td> <button class="btn btn-sm" type="button" id="2" (click)="seleccionarDia(2)"
+                            [ngClass]="martesSeleccionado ? 'success' : 'danger'">𝙈</button>
+                        </td>
+                        <td> <button class="btn btn-sm" type="button" id="3" (click)="seleccionarDia(3)"
+                            [ngClass]="miercolesSeleccionado ? 'success' : 'danger'">𝙈</button>
+                        </td>
+                        <td> <button class="btn btn-sm" type="button" id="4" (click)="seleccionarDia(4)"
+                            [ngClass]="juevesSeleccionado ? 'success' : 'danger'">𝙅</button></td>
+                        <td> <button class="btn btn-sm" type="button" id="5" (click)="seleccionarDia(5)"
+                            [ngClass]="viernesSeleccionado ? 'success' : 'danger'">𝙑</button>
+                        </td>
+                        <td> <button class="btn btn-sm" type="button" id="6" (click)="seleccionarDia(6)"
+                            [ngClass]="sabadoSeleccionado ? 'success' : 'danger'">𝙎</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td> </td>
+                        <td *ngIf='!this.sabadoSeleccionado'> 
+                            <button class="btn btn-sm" type="button" [ngClass]="todoElDiaSeleccionado ? 'success' : 'danger'"
+                            (click)="seleccionarHorario('todoElDia')">08 a
+                            19</button>
+                        </td>
+                        <td *ngIf='!this.sabadoSeleccionado'> 
+                            <button class="btn btn-sm" type="button" [ngClass]="mananaSeleccionado ? 'success' : 'danger'"
+                            (click)="seleccionarHorario('mañana')">08 a
+                            12</button>
+                        </td>
+                        <td *ngIf='!this.sabadoSeleccionado'> 
+                            <button class="btn btn-sm" type="button" [ngClass]="tardeSeleccionado ? 'success' : 'danger'"
+                            (click)="seleccionarHorario('tarde')">13 a
+                            19</button>
+                        </td>
+                        <td *ngIf='this.sabadoSeleccionado'> 
+                            <button class="btn btn-sm" type="button" [ngClass]="sabadoHorarioSeleccionado ? 'success' : 'danger'"
+                            (click)="seleccionarHorario('sabado')">8 a
+                            14</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+        </div>
+    
+    </div>
+    <div *ngIf='this.mostrarPDF' >
+        <div id="historiaClinica">
+            <small class="text-start">{{this.diaDeEmisionParseado}}</small>
+            <div class="card">
+                <div class="card-header" style="background-color: rgb(182, 182, 182);" > 
+                    <img src="../../../assets/clinica.ico" width="150px" height="150px" class="rounded" style="align-self: center;">
+                    <p class="text-center">
+                        <b class="fs-2 me-5">{{this.as.logeado.nombre}} {{this.as.logeado.apellido}}</b> 
+                    </p>
+                 </div>
+                <div class="card-body" style="background-color: rgb(182, 182, 182);">
+                    <p class="fs-5">
+                        <b>Altura:</b> {{this.hc.altura}}
+                      </p>
+                      <p class="fs-5">
+                        <b>Peso:</b> {{this.hc.peso}}
+                      </p>
+                      <p class="fs-5">
+                        <b>Temperatura:</b> {{this.hc.temperatura}}
+                      </p>
+                      <p class="fs-5">
+                        <b>Presión:</b> {{this.hc.presion}}
+                      </p>
+                      <p class="fs-5" *ngIf='hc.datoDinamico1 != ""'>
+                        <b>{{this.hc?.datoDinamico1?.clave}}:</b> {{this.hc?.datoDinamico1?.valor}}
+                      </p>   
+                      <p class="fs-5" *ngIf='hc.datoDinamico2 != ""'>
+                        <b>{{this.hc?.datoDinamico2?.clave}}:</b> {{this.hc?.datoDinamico2?.valor}}
+                      </p> 
+                      <p class="fs-5" *ngIf='hc.datoDinamico3 != ""'>
+                        <b>{{this.hc?.datoDinamico3?.clave}}:</b> {{this.hc?.datoDinamico3?.valor}}
+                      </p>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-dark mt-2" (click)="this.imprimirPdf()">Descargar PDF</button>
+    </div>
+</div>

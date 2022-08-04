@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<div class="row justify-content-around text-center">
+    <div class="col-12" >
+        <button class="col-6 button fs-3 ms-2" (click)="this.navegar(1)">Mi Perfil</button>
+        <button class="col-6 button fs-3 ms-2" *ngIf='this.as.logeado.perfil != "admin"' (click)="this.navegar(2)">Mis Turnos</button>
+        <button class="col-6 button fs-3 ms-2" *ngIf='this.as.logeado.perfil == "admin"' (click)="this.navegar(3)">Turnos</button>
+    </div>
+</div>

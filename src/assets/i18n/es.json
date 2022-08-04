@@ -1,0 +1,38 @@
+{
+    "HOME": {
+        "TITLE": "Bienvenido!",
+        "SUBTITLE": "Clinica Online - Laboratorio 4",
+        "P1": "En la parte superior encontrara el menú para navegar por las areas de esta clínica.",
+        "P2": "Registrese para continuar. Si usted ya tiene un perfil creado, ingrese al sistema desde la pestaña de login",
+        "P3": "Muchas gracias y esperamos que tenga buen dia!",
+        "LOGIN": "Ingreso",
+        "REGISTER": "Registro"
+    },
+    "NAVBAR": {
+        "WELCOME": "Bienvenido",
+        "LOGIN": "Ingreso",
+        "REGISTER": "Registro",
+        "USER": "Usuarios",
+        "REQUEST": "Solicitar Turno",
+        "PATIENT": "Pacientes",
+        "STATISTICS": "Estadisticas de la Clinica",
+        "LOGOUT": "Salir",
+        "POLL": "Encuesta"
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": {
+            "EMAIL": "Correo",
+            "REQUIRED":"Correo requerido",
+            "INVALID":"Correo inválido"
+        },
+        "PASSWORD": {
+            "PASSWORD":"Contraseña",
+            "REQUIRED": "Contraseña requerida",
+            "INVALID":"La contraseña debe contener 6 caracteres o mas"
+        },
+        "LOGIN": "Ingresar",
+        "ENTERFAST": "Ingresar rápido",
+        "PROFILE": "Perfil:"
+    }
+}

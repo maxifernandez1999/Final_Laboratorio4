@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container" style="min-height: 50vh !important">
+        <div *ngIf="this.as.loading">
+            <app-spinner></app-spinner>
+        </div>
+    
+        <form [formGroup]='form' (ngSubmit)="this.logearse()">
+            <div class="containerForm text-white">
+                <h1 class="text-center">{{'LOGIN.TITLE' | translate }} </h1>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="email"><b>{{'LOGIN.EMAIL.EMAIL' | translate }} </b></label>
+                        <input type="text" formControlName='mail' name="mail" required>  
+                        <small class="invalid" *ngIf="form.controls.mail.errors?.required && form.controls.mail.touched">{{'LOGIN.EMAIL.REQUIRED' | translate }} </small>
+                        <small class="invalid" *ngIf="form.controls.mail.errors?.email">{{'LOGIN.EMAIL.INVALID' | translate }}</small>
+                    </div>
+    
+                    <div class="col-12">
+                        <label for="password"><b>{{'LOGIN.PASSWORD.PASSWORD' | translate }}</b></label>
+                        <input type="password" formControlName='password' name="password" required>
+                        <small class="invalid" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">{{'LOGIN.PASSWORD.REQUIRED' | translate }}</small>
+                        <small class="invalid" *ngIf="form.controls.password.errors?.minlength">{{'LOGIN.PASSWORD.INVALID' | translate }}</small>
+                    </div>
+                </div>
+    
+                <div class="col-12">
+                    <button type="submit" [disabled]='form.invalid' class="button fs-4 mt-3">{{'LOGIN.LOGIN' | translate }}</button>
+                    <button type="button" class="button fs-5 mt-3" (click)='this.ingresoRapido = !this.ingresoRapido'>{{'LOGIN.ENTERFAST' | translate }}</button>
+                </div>
+                <div *ngIf='this.ingresoRapido'>
+                    <div class="row justify-content-around">            
+                            <div appCardsLogin class="card bg-dark text-white mt-2 ml-1 col-7 " style="width: 11em; height: 15em; border-color: rgba(34, 123, 196, 0.925); cursor: pointer;"
+                            *ngFor='let perfil of perfilesGenerales'>
+                                <div class="card-body" (click)='this.cargarPerfil(perfil)'>
+                                    <img class="card-img-top" src="{{perfil.imagen}}" width="10px" height="120px" >
+                                    <!-- <img class="card-img-top" src="{{perfil.imagen}}" width="10px" height="120px" *ngIf='perfil.perfil != "paciente"'>
+                                    <img class="card-img-top" src="{{perfil.imagenes[1]}}" width="10px" height="120px" *ngIf='perfil.perfil == "paciente"'> -->
+                                    <h6 class="card-title mt-1 text-center">{{perfil.nombre}} {{perfil.apellido}}</h6>
+                                    <p class="card-text">
+                                    <div>
+                                        <b>{{'LOGIN.PROFILE' | translate }} </b> {{perfil.perfil}}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <app-idioms (lang)="changeLanguage($event)"></app-idioms>

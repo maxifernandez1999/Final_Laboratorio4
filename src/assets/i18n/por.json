@@ -1,0 +1,38 @@
+{
+  "HOME": {
+      "TITLE": "Bem-vindo!",
+      "SUBTITLE": "Clínica Online - Laboratório 4",
+      "P1": "Na topo encontrará o menu para navegar pelas áreas desta clínica",
+      "P2": "Faça login para continuar. Se voçe já possui um perfil, faça login no sistema na guia de login.",
+      "P3": "Muito obrigado e esperamos que você tenha um bom dia!",
+      "LOGIN": "Login",
+      "REGISTER": "Inscrição"
+  },
+  "NAVBAR": {
+      "WELCOME": "Ben-vindo",
+      "LOGIN": "Login",
+      "REGISTER": "Inscrição",
+      "USER": "Usuários",
+      "REQUEST": "Pedir Turno",
+      "PATIENT": "Pacientes",
+      "STATISTICS": "Estatísticas da clínica",
+      "LOGOUT": "Sair",
+      "POLL": "Votação"
+  },
+  "LOGIN": {
+      "TITLE": "Login",
+      "EMAIL": {
+          "EMAIL": "Correio",
+          "REQUIRED":"Correio obrigatório",
+          "INVALID":"Correio inválido"
+      },
+      "PASSWORD": {
+          "PASSWORD":"Senha",
+          "REQUIRED": "Senha obrigatório",
+          "INVALID":"A senha deve conter 6 caracteres ou mais"
+      },
+      "LOGIN": "Entrar",
+      "ENTERFAST": "Entre rápido",
+      "PROFILE": "Perfil:"
+  }
+}

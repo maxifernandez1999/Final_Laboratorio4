@@ -1,0 +1,114 @@
+<div class="container">
+         <div *ngIf="this.as.loading">
+                <div *ngIf="this.as.loading">
+                    <app-spinner></app-spinner>
+                </div>
+        </div>
+        <form [formGroup]='form' (ngSubmit)='this.registrar()'>
+            <div class="containerForm text-white">
+                <h2 class="text-center" style="letter-spacing: 2px; ">Registro {{this.tipoUsuario}}</h2>
+                <br>
+               <div class="row">
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="email">Email</label>
+                        <input type="text" formControlName='mail' name="mail" required>  
+                        <small class="invalid" *ngIf="form.controls.mail.errors?.required && form.controls.mail.touched">El mail es requerido</small>
+                        <small class="invalid" *ngIf="form.controls.mail.errors?.email">No es un mail valido</small>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
+                        <label for="password">Contraseña</label>
+                        <input type="password" formControlName='password' name="password" required>            
+                        <small class="invalid" *ngIf="form.controls.password.errors?.required && form.controls.password.touched">La contraseña es requerida</small>
+                        <small class="invalid" *ngIf="form.controls.password.errors?.minlength">La contraseña es debil</small>
+                    </div>
+                </div>
+                 <div class="row justify-content-center">
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" formControlName='nombre' name="nombre" required>        
+                        <small class="invalid" *ngIf="form.controls.nombre.errors?.required && form.controls.nombre.touched">El nombre es requerido</small>
+                    </div>
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" formControlName='apellido' name="apellido" required>
+                        
+                        <small class="invalid" *ngIf="form.controls.apellido.errors?.required && form.controls.apellido.touched">El apellido es requerido</small>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-sm-6 col-12 mb-2">
+                        <label for="edad">Edad</label>
+                        <input type="number" name="edad" formControlName='edad' required>
+        
+                        <small class="invalid" *ngIf="form.controls.edad.errors?.required && form.controls.edad.touched">La edad es requerida</small>
+                        <small class="invalid" *ngIf="form.controls.edad.errors?.min || form.controls.edad.errors?.max">La edad debe estar entre los 25 y los 85</small>
+                    </div>
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="dni">DNI</label>
+                        <input type="number" name="dni" formControlName='dni' required>
+                
+                        <small class="invalid" *ngIf="form.controls.dni.errors?.required && form.controls.dni.touched">El dni es requerido</small>
+                        <small class="invalid" *ngIf="form.controls.dni.errors?.min || form.controls.dni.errors?.max">El dni debe tener 8 digitos</small>
+                    </div>
+                    
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-9 mb-3" *ngIf='this.tipoUsuario == "especialista"'>
+                        <label for="especialidad">Especialidad</label>
+                        <input type="text" id="floatingPassword" formControlName='especialidad' list="especialidades" autocomplete="off">
+                           
+                        <small class="invalid" *ngIf="form.controls.especialidad.touched">La especialidad es requerida</small>
+                        <small class="invalid" *ngIf="form.controls.especialidad.errors?.maxlength">Maximo 20 caracteres</small>
+                    </div>
+                    <div class="col-3" style="margin-top: 26px;" *ngIf='this.tipoUsuario == "especialista"'>
+                        <button type="button" class="button" (click)="agregarEspecialidad()">Agregar Especialidad</button>
+                    </div>
+                    <div class="col-12 mb-3" *ngIf='this.tipoUsuario == "paciente"'>
+                        <label for="obraSocial">Obra social</label>
+                        <input type="text" formControlName='obraSocial' name="obraSocial" required>
+                        <small class="invalid" *ngIf="form.controls.obraSocial.errors?.required && form.controls.obraSocial.touched">La obra social es requerida</small>
+                        <small class="invalid" *ngIf="form.controls.obraSocial.errors?.maxlength">Maximo 20 caracteres</small>
+                    </div>
+                    <div class="row justify-content-center" *ngIf='this.tipoUsuario == "especialista"'>
+                        <div class="mb-2 col-7">
+                         <div class="row">
+                             <div class="col-6" *ngFor="let esp of this.especialidades">
+                                 <button type="button" class="button" (click)="cargarEspecialidad(esp)">{{esp.nombre}}</button>
+                             </div>
+                         </div>
+                        </div>
+                        <div class="col-4 mb-2">
+                            <p>Especialidades asignadas a este especialista:</p>
+                            <ul style="list-style: none;">
+                                <li *ngFor="let esp of especialidadesAAgregar">{{esp.nombre}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <input type="file" formControlName='imagen' (change)="change($event)" *ngIf='this.tipoUsuario !== "paciente"'>
+                        <input type="file" formControlName='imagen' (change)="change($event)" multiple *ngIf='this.tipoUsuario === "paciente";'>
+                        <small class="invalid" *ngIf="form.controls.imagen.errors?.required && form.controls.imagen.touched && this.tipoUsuario == 'especialista'">La imagen es requerida</small>
+                        <small class="invalid" *ngIf="form.controls.imagen.errors?.required && form.controls.imagen.touched && this.tipoUsuario == 'paciente'">Las imagenes son requeridas</small>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <label for="capcha">Capcha</label>
+                        <input #capchaValue appCapcha type="number" readonly>
+                    </div>
+                    <div class="col-8" style="margin-top: 32px;">
+                        <input type="text" formControlName='capcha' name="capcha" required>
+                        <small class="invalid" *ngIf="form.controls.capcha.errors?.required && form.controls.capcha.touched">El capcha es requerido</small>
+                    </div>
+                    <div class="col-2 text-center" style="margin-top: 32px;">
+                        <input type="text" class="col-12" required readonly value="❌" *ngIf='this.form.get("capcha")?.value != this.numeroRandom'>
+                        <input type="text" class="col-12" required readonly value="✔️" *ngIf='this.form.get("capcha")?.value == this.numeroRandom'>
+                    </div>
+                </div>
+                
+            
+                <div class="col-12">
+                    <button type="submit" [disabled]='form.invalid' class="button fs-4">Registrarse</button>
+                </div>
+            </div>
+        </form>
+    </div>
